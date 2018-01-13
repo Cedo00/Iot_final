@@ -46,7 +46,7 @@ def get_faces( img ):
     gray = cv2.cvtColor( img, cv2.COLOR_BGR2GRAY )
     faces = face_cascade.detectMultiScale( gray )
 
-    if faces.size() > 0:
+    if len(faces) > 0:
         localtime = time.localtime(time.time())
         path_time = localtime.tm_year + '-' + localtime.tm_mon + '-' + localtime.tm_mday + '-' + localtime.tm_hour + '-' + localtime.tm_min + '-' + localtime.tm_sec
         IMAGE_PATH = IMAGE_PATH + path_time + '.jpg'
