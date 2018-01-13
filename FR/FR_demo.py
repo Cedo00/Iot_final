@@ -12,8 +12,6 @@ import time
 
 ### Setup #####################################################################
 
-IMAGE_PATH = "../img"
-
 resX = 320
 resY = 240
 
@@ -49,7 +47,7 @@ def get_faces( img ):
     if len(faces) > 0:
         localtime = time.localtime(time.time())
         path_time = str(localtime.tm_year) + '-' + str(localtime.tm_mon) + '-' + str(localtime.tm_mday) + '-' + str(localtime.tm_hour) + '-' + str(localtime.tm_min) + '-' + str(localtime.tm_sec)
-        IMAGE_PATH = IMAGE_PATH + path_time + '.jpg'
+        IMAGE_PATH = "../img/"+ path_time + '.jpg'
         cv2.imwrite(IMAGE_PATH, img)
 
     return faces, img
