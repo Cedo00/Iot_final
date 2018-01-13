@@ -48,7 +48,7 @@ def get_faces( img ):
 
     if len(faces) > 0:
         localtime = time.localtime(time.time())
-        path_time = localtime.tm_year + '-' + localtime.tm_mon + '-' + localtime.tm_mday + '-' + localtime.tm_hour + '-' + localtime.tm_min + '-' + localtime.tm_sec
+        path_time = str(localtime.tm_year) + '-' + str(localtime.tm_mon) + '-' + str(localtime.tm_mday) + '-' + str(localtime.tm_hour) + '-' + str(localtime.tm_min) + '-' + str(localtime.tm_sec)
         IMAGE_PATH = IMAGE_PATH + path_time + '.jpg'
         cv2.imwrite(IMAGE_PATH, img)
 
