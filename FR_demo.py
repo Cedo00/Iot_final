@@ -12,7 +12,7 @@ import time
 
 ### Setup #####################################################################
 
-os.putenv( 'SDL_FBDEV', '/dev/fb0' )
+IMAGE_PATH = "../img"
 
 resX = 320
 resY = 240
@@ -20,15 +20,12 @@ resY = 240
 cx = resX / 2
 cy = resY / 2
 
-# os.system( "echo 0=150 > /dev/servoblaster" )
-# os.system( "echo 1=150 > /dev/servoblaster" )
-
 xdeg = 150
 ydeg = 150
 
-
 # Setup the camera
 camera = PiCamera()
+time.sleep(2)
 camera.resolution = ( resX, resY )
 camera.framerate = 60
 
@@ -49,6 +46,12 @@ def get_faces( img ):
     gray = cv2.cvtColor( img, cv2.COLOR_BGR2GRAY )
     faces = face_cascade.detectMultiScale( gray )
 
+    if faces.size() > 0:
+        localtime = time.localtime(time.time())
+        path_time = localtime.tm_year + '-' + localtime.tm_mon + '-' + localtime.tm_mday + '-' + localtime.tm_hour + '-' + localtime.tm_min + '-' + localtime.tm_sec
+        IMAGE_PATH = IMAGE_PATH + path_time + '.jpg'
+        cv2.imwrite(IMAGE_PATH, img)
+
     return faces, img
 
 def draw_frame( img, faces ):
@@ -63,23 +66,6 @@ def draw_frame( img, faces ):
 
         cv2.rectangle( img, ( x, y ),( x + w, y + h ), ( 200, 255, 0 ), 2 )
         cv2.putText(img, "Face No." + str( len( faces ) ), ( x, y ), cv2.FONT_HERSHEY_SIMPLEX, 0.5, ( 0, 0, 255 ), 2 )
-
-        # tx = x + w/2
-        # ty = y + h/2
-
-        # if   ( cx - tx > 15 and xdeg <= 190 ):
-        #     xdeg += 1
-            # os.system( "echo 0=" + str( xdeg ) + " > /dev/servoblaster" )
-        # elif ( cx - tx < -15 and xdeg >= 110 ):
-        #     xdeg -= 1
-            # os.system( "echo 0=" + str( xdeg ) + " > /dev/servoblaster" )
-
-        # if   ( cy - ty > 15 and ydeg >= 110 ):
-        #     ydeg -= 1
-            # os.system( "echo 1=" + str( ydeg ) + " > /dev/servoblaster" )
-        # elif ( cy - ty < -15 and ydeg <= 190 ):
-        #     ydeg += 1
-            # os.system( "echo 1=" + str( ydeg ) + " > /dev/servoblaster" )
 
     # Calculate and show the FPS
     fps = fps + 1
