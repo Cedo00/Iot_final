@@ -9,6 +9,7 @@ import cv2
 import os
 import time
 
+import MQTT.send as m_send
 
 ### Setup #####################################################################
 
@@ -45,6 +46,7 @@ def get_faces( img ):
     faces = face_cascade.detectMultiScale( gray )
 
     if len(faces) > 0:
+        m_send.send("there is someone.")
         localtime = time.localtime(time.time())
         path_time = str(localtime.tm_year) + '-' + str(localtime.tm_mon) + '-' + str(localtime.tm_mday) + '-' + str(localtime.tm_hour) + '-' + str(localtime.tm_min) + '-' + str(localtime.tm_sec)
         IMAGE_PATH = "../img/"+ path_time + '.jpg'
