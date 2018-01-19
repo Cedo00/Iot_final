@@ -60,11 +60,14 @@ def get_faces( img ):
         IMAGE_PATH = '../IMAGE/' + path_time + '.jpg'
         cv2.imwrite(IMAGE_PATH, img)
 
+        # pause 2s
+        time.sleep(2)
+
         # send mail
         sendMail.sendMail(path_time + '.jpg')
 
-        # pause 5s
-        time.sleep(5)
+        # pause 3s
+        time.sleep(3)
 
     return faces, img
 

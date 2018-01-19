@@ -37,7 +37,7 @@ def sendMail(IMAGENAME):
 
     # 添加附件就是加上一个MIMEBase，从本地读取一个图片:
     with open('../IMAGE/' + IMAGENAME, 'rb') as f:
-        # 设置附件的MIME和文件名，这里是png类型:
+        # 设置附件的MIME和文件名，这里是jpg类型:
         mime = MIMEBase('image', 'jpg', filename=IMAGENAME)
         # 加上必要的头信息:
         mime.add_header('Content-Disposition', 'attachment', filename='test.jpg')
