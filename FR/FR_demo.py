@@ -12,6 +12,7 @@ import os
 import time
 
 import MQTT.send as m_send
+import MAIL.sendmail_with_image as sendMail
 
 ### Setup #####################################################################
 
@@ -48,11 +49,20 @@ def get_faces( img ):
     faces = face_cascade.detectMultiScale( gray )
 
     if len(faces) > 0:
+        # 发送MQTT信息
         m_send.send("there is someone.")
+
+        # 保存图片
         localtime = time.localtime(time.time())
         path_time = str(localtime.tm_year) + '-' + str(localtime.tm_mon) + '-' + str(localtime.tm_mday) + '-' + str(localtime.tm_hour) + '-' + str(localtime.tm_min) + '-' + str(localtime.tm_sec)
-        IMAGE_PATH = "../image/"+ path_time + '.jpg'
+        IMAGE_PATH = '../IMAGE/' + path_time + '.jpg'
         cv2.imwrite(IMAGE_PATH, img)
+
+        # 发送邮件
+        sendMail(path_time + '.jpg')
+
+        # 暂停 5s
+        time.sleep(5)
 
     return faces, img
 
