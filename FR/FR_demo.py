@@ -59,7 +59,7 @@ def get_faces( img ):
         cv2.imwrite(IMAGE_PATH, img)
 
         # 发送邮件
-        sendMail(path_time + '.jpg')
+        sendMail.sendMail(path_time + '.jpg')
 
         # 暂停 5s
         time.sleep(5)
