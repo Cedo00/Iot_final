@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 ### Imports ###################################################################
 import sys
 sys.path.append("..")
@@ -49,19 +51,19 @@ def get_faces( img ):
     faces = face_cascade.detectMultiScale( gray )
 
     if len(faces) > 0:
-        # 发送MQTT信息
+        # send MQTT info
         m_send.send("there is someone.")
 
-        # 保存图片
+        # save photo
         localtime = time.localtime(time.time())
         path_time = str(localtime.tm_year) + '-' + str(localtime.tm_mon) + '-' + str(localtime.tm_mday) + '-' + str(localtime.tm_hour) + '-' + str(localtime.tm_min) + '-' + str(localtime.tm_sec)
         IMAGE_PATH = '../IMAGE/' + path_time + '.jpg'
         cv2.imwrite(IMAGE_PATH, img)
 
-        # 发送邮件
+        # send mail
         sendMail.sendMail(path_time + '.jpg')
 
-        # 暂停 5s
+        # pause 5s
         time.sleep(5)
 
     return faces, img

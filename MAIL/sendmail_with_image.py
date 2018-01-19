@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import smtplib
 from email.header import Header
 from email import encoders
@@ -7,22 +9,22 @@ from email.mime.base import MIMEBase
 from email.utils import parseaddr, formataddr
 
 
-# 格式化邮箱地址
+# Format the email address.
 def _format_addr(s):
     name, addr = parseaddr(s)
     return formataddr((Header(name, 'utf-8').encode(), addr))
 
 
 def sendMail(IMAGENAME):
-    # 第三方 SMTP 服务
-    mail_host = "smtp.163.com"  # 设置服务器
+    # Third party SMTP service.
+    mail_host = "smtp.163.com"  # Set up the server
     mail_host_port = 465
 
-    mail_user = "correct_prd_mail"  # 用户名
-    mail_pass = "123abc123abc"  # 授权码
+    mail_user = "correct_prd_mail"  # The user name
+    mail_pass = "123abc123abc"  # Authorization code
 
     sender = "correct_prd_mail@163.com"
-    receivers = ['a434718806@126.com']  # 接收邮件
+    receivers = ['a434718806@126.com']  # Receive mail
 
     # 邮件对象:
     message = MIMEMultipart()

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import paho.mqtt.publish as publish
 
 HOST = "m14.cloudmqtt.com"
