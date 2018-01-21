@@ -28,12 +28,12 @@ def sendMail(IMAGENAME):
 
     # 邮件对象:
     message = MIMEMultipart()
-    message['From'] = _format_addr('树莓派模块 <%s>' % sender)
+    message['From'] = _format_addr('树莓派检测模块 <%s>' % sender)
     message['To'] = _format_addr('管理员 <%s>' % receivers[0])
-    message['Subject'] = Header('来自 raspberry 的问候……', 'utf-8').encode()
+    message['Subject'] = Header('来自 raspberry 的问候 ……', 'utf-8').encode()
 
     # 邮件正文是MIMEText:
-    message.attach(MIMEText('somebody comes home, send with the image...', 'plain', 'utf-8'))
+    message.attach(MIMEText('thera is someone here, now send message with the image...', 'plain', 'utf-8'))
 
     # 添加附件就是加上一个MIMEBase，从本地读取一个图片:
     with open('../IMAGE/' + IMAGENAME, 'rb') as f:
@@ -52,7 +52,7 @@ def sendMail(IMAGENAME):
 
     try:
         smtpObj = smtplib.SMTP(mail_host)
-        smtpObj.set_debuglevel(1)
+        # smtpObj.set_debuglevel(1)
         smtpObj.login(mail_user, mail_pass)
         smtpObj.sendmail(sender, receivers, message.as_string())
         smtpObj.quit()
