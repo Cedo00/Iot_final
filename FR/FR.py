@@ -21,12 +21,6 @@ import MAIL.sendmail_with_image as sendMail
 resX = 320
 resY = 240
 
-cx = resX / 2
-cy = resY / 2
-
-xdeg = 150
-ydeg = 150
-
 # Setup the camera
 camera = PiCamera()
 time.sleep(2)
@@ -52,7 +46,7 @@ def get_faces( img ):
 
     if len(faces) > 0:
         # send MQTT info
-        m_send.send("there is someone.")
+        m_send.send("1")
 
         # save photo
         localtime = time.localtime(time.time())
@@ -73,8 +67,6 @@ def get_faces( img ):
 
 def draw_frame( img, faces ):
 
-    global xdeg
-    global ydeg
     global fps
     global time_t
 
